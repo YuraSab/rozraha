@@ -3,16 +3,15 @@ import emailjs from "@emailjs/browser";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setEmail, setPassword} from "../../redux/action-creators/Password";
+import styles from "./LoginEmail.module.css";
 
 const LoginEmail = () => {
 
     const {password, email} = useSelector(({
-                                                        password: {password},
-                                                        email: {email}
-                                                    }) => ({password, email}));
+                                               password: {password},
+                                               email: {email}
+                                           }) => ({password, email}));
     const dispatch = useDispatch();
-
-
 
 
     const createPassword = () => {
@@ -55,9 +54,7 @@ const LoginEmail = () => {
         emailjs.send(serviceID, templateID, params)
             .then(
                 res => {
-                    // document.getElementById("name").value = "";
                     document.getElementById("email").value = "";
-                    // document.getElementById("message").value = "";
                     alert("your message successfully");
                     console.log(res);
                 }
@@ -66,14 +63,13 @@ const LoginEmail = () => {
     }
 
     return (
-        <div>
-            {/*<input type="text" placeholder="Enter your name" id="name"/>*/}
-            <input type="text" placeholder="Enter your email" id="email"/>
-            {/*<textarea id="message" rows="3"></textarea>*/}
-
-            <Link to={"password"}>
-                <button onClick={sendMail}>Next</button>
-            </Link>
+        <div className={styles.main}>
+            <div className={styles.mainDiv}>
+                <input className={styles.inputDiv} type="text" placeholder="Enter your email" id="email"/>
+                <Link to={"password"}>
+                    <button className={styles.buttonDiv} onClick={sendMail}>Next</button>
+                </Link>
+            </div>
         </div>
     );
 };
